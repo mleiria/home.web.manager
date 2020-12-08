@@ -1,0 +1,3 @@
+<jboss-web>
+    <context-root>cluedo</context-root>
+</jboss-web>

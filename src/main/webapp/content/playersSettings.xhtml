@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template/masterTemplate.xhtml">
+    <script type="text/javascript">
+        //<![CDATA[
+        function start() {
+            PF('statusDialog').show();
+        }
+
+        function stop() {
+            PF('statusDialog').hide();
+        }
+
+        //]]>
+    </script>
+    <ui:define name="content">
+
+        <p:dialog modal="true" widgetVar="statusDialog" header="Status"
+                  draggable="false" closable="false" resizable="false">
+            <p:graphicImage name="images/AjaxLoading.gif"/>
+        </p:dialog>
+
+        <h:form id="theForm">
+            <h:panelGrid columns="2">
+                <p:outputLabel for="@next" value="Game Type: "/>
+                <p:selectOneMenu id="gameType" value="#{playersSettingsBean.gameType}">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItems value="#{playersSettingsBean.gameTypeItems}"/>
+                </p:selectOneMenu>
+                <f:facet name="footer">
+                    <p:commandButton value="Continue." update="theForm"
+                                     actionListener="#{playersSettingsBean.continueBtn}"></p:commandButton>
+                </f:facet>
+            </h:panelGrid>
+
+            <p:dataGrid var="selectedCards" value="#{playersSettingsBean.selectedCards}" columns="6" layout="grid"
+                        id="selectedCards">
+                <f:facet name="header">
+                    Selected Cards
+                </f:facet>
+                <p:graphicImage name="images/cards/#{selectedCards}.jpg" width="10" height="20"/>
+                <p:spacer width="10" height="10" />
+                <p:outputLabel value="#{selectedCards}"></p:outputLabel>
+            </p:dataGrid>
+
+
+            <p:dataGrid var="card" value="#{playersSettingsBean.cardsEngine.orderedCards}" columns="6" layout="grid"
+                        id="cards">
+                <f:facet name="header">
+                    Select your Cards
+                </f:facet>
+                <p:panel header="#{card.value}" style="text-align:center">
+                    <h:panelGrid columns="1" style="width:100%">
+                        <h:commandLink action="#{playersSettingsBean.selectCharacterBtn(card.value)}">
+                            <p:graphicImage name="images/cards/#{card.value}.jpg" width="100" height="200"/>
+                        </h:commandLink>
+                    </h:panelGrid>
+                </p:panel>
+
+            </p:dataGrid>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>
