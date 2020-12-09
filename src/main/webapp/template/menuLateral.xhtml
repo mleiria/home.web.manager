@@ -1,45 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <body>
-        <ui:composition>
-            <h:form>
-                <p:growl>
-                    <p:autoUpdate />
-                </p:growl>
-                <p:panelMenu>
-                    <p:submenu label="Game Settings">
-                        <p:menuitem value="Início" url="/cluedo/faces/content/playersSettings.xhtml" icon="ui-icon-wrench" />
-                    </p:submenu>
-                    <p:separator />
-                    <p:submenu label="Classify">
-                        <p:menuitem value="Classify" url="#" icon="ui-icon-wrench" />
-                    </p:submenu>
-                    <p:separator />
-                    <p:submenu label="Cluster">
-                        <p:menuitem value="Cluster" url="#" icon="ui-icon-wrench" />
-                    </p:submenu>
-                    <p:separator />
-                    <p:submenu label="Associate">
-                        <p:menuitem value="Associate" url="#" icon="ui-icon-wrench" />
-                    </p:submenu>
-                    <p:separator />
-                    <p:submenu label="Select Attributes">
-                        <p:menuitem value="Select Attributes" url="#" icon="ui-icon-wrench" />
-                    </p:submenu>
-                    <p:separator />
-                    <p:submenu label="Visualize">
-                        <p:menuitem value="Visualize" url="#" icon="ui-icon-wrench" />
-                    </p:submenu>
-                </p:panelMenu>
-            </h:form>
-        </ui:composition>
-    </body>
+<body>
+<ui:composition>
+    <h:form>
+        <p:growl>
+            <p:autoUpdate/>
+        </p:growl>
+        <p:panelMenu>
+            <p:submenu label="Games Experiments">
+                <p:submenu label="Cluedo">
+                    <p:menuitem value="Início" url="/home/faces/content/playersSettings.xhtml" icon="ui-icon-wrench"/>
+                </p:submenu>
+                <p:submenu label="Poker">
+                    <p:menuitem value="Início" url="/home/faces/content/playersSettings.xhtml" icon="ui-icon-wrench"/>
+                </p:submenu>
+            </p:submenu>
+            <p:separator/>
+            <p:submenu label="Classify">
+                <p:menuitem value="Classify" url="#" icon="ui-icon-wrench"/>
+            </p:submenu>
+            <p:separator/>
+            <p:submenu label="Cluster">
+                <p:menuitem value="Cluster" url="#" icon="ui-icon-wrench"/>
+            </p:submenu>
+            <p:separator/>
+            <p:submenu label="Associate">
+                <p:menuitem value="Associate" url="#" icon="ui-icon-wrench"/>
+            </p:submenu>
+            <p:separator/>
+            <p:submenu label="Select Attributes">
+                <p:menuitem value="Select Attributes" url="#" icon="ui-icon-wrench"/>
+            </p:submenu>
+            <p:separator/>
+            <p:submenu label="Visualize">
+                <p:menuitem value="Visualize" url="#" icon="ui-icon-wrench"/>
+            </p:submenu>
+        </p:panelMenu>
+    </h:form>
+</ui:composition>
+</body>
 
 </html>

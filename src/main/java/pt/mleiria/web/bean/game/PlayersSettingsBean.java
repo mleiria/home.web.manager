@@ -1,17 +1,15 @@
-package pt.mleiria.web.bean;
+package pt.mleiria.web.bean.game;
 
-import pt.mleiria.cluedo.contents.Card;
-import pt.mleiria.cluedo.contents.GameType;
-import pt.mleiria.cluedo.core.CardsEngine;
+
+import pt.mleiria.game.cluedo.contents.GameType;
+import pt.mleiria.game.cluedo.core.CardsEngine;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 
 @ManagedBean(name = "playersSettingsBean")

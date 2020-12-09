@@ -1,4 +1,4 @@
-package pt.mleiria.cluedo.contents;
+package pt.mleiria.game.cluedo.contents;
 
 import java.util.ArrayList;
 import java.util.List;

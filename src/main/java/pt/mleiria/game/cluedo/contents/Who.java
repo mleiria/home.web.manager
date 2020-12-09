@@ -1,12 +1,6 @@
-package pt.mleiria.cluedo.contents;
+package pt.mleiria.game.cluedo.contents;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-public enum Who implements Card{
+public enum Who implements Card {
 
     CERSEI_LANNISTER("Cercei Lannister", GameType.A_FORTALEZA_VERMELHA),
     DAENERYS_TARGARYEN("Daenerys Targaryen", GameType.MEESEEN),

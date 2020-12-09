@@ -1,4 +1,4 @@
-package pt.mleiria.cluedo.contents;
+package pt.mleiria.game.cluedo.contents;
 
 public enum GameType {
     A_FORTALEZA_VERMELHA("A Fortaleza Vermelha"),

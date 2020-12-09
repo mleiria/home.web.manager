@@ -1,9 +1,4 @@
-package pt.mleiria.cluedo.contents;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+package pt.mleiria.game.cluedo.contents;
 
 public enum Where implements Card {
 

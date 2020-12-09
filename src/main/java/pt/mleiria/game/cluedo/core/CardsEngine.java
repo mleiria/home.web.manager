@@ -1,9 +1,12 @@
-package pt.mleiria.cluedo.core;
+package pt.mleiria.game.cluedo.core;
 
-import pt.mleiria.cluedo.contents.*;
+import pt.mleiria.game.cluedo.contents.*;
 import pt.mleiria.graph.undirected.Graph;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 

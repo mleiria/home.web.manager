@@ -1,7 +1,4 @@
-package pt.mleiria.cluedo.contents;
-
-import java.util.Arrays;
-import java.util.List;
+package pt.mleiria.game.cluedo.contents;
 
 public enum What implements Card {
 
