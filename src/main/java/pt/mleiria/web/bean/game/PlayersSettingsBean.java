@@ -1,9 +1,13 @@
 package pt.mleiria.web.bean.game;
 
 
+import pt.mleiria.ConfigFileReader;
+import pt.mleiria.game.cluedo.contents.Card;
 import pt.mleiria.game.cluedo.contents.GameType;
 import pt.mleiria.game.cluedo.core.CardsEngine;
+import pt.mleiria.graph.undirected.Graph;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
@@ -18,10 +22,16 @@ public class PlayersSettingsBean implements Serializable {
 
     private static final Logger LOG = Logger.getLogger(PlayersSettingsBean.class.getName());
 
+
     private CardsEngine cardsEngine;
+
     private GameType gameType;
     private List<SelectItem> gameTypeItems;
     private List<String> selectedCards;
+    private int numPlayers;
+    private final int[] numPlayersList;
+    private static final int NUM_MAX_PLAYERS = 6;
+
 
     /**
      *
@@ -29,6 +39,10 @@ public class PlayersSettingsBean implements Serializable {
     public PlayersSettingsBean() {
         gameTypeItems = new ArrayList<>();
         selectedCards = new ArrayList<>();
+        numPlayersList = new int[NUM_MAX_PLAYERS];
+        for (int i = 0; i < NUM_MAX_PLAYERS; i++) {
+            numPlayersList[i] = i + 1;
+        }
         for (final GameType gameType : GameType.values()) {
             gameTypeItems.add(new SelectItem(gameType.name(), gameType.getValue()));
         }
@@ -39,13 +53,23 @@ public class PlayersSettingsBean implements Serializable {
         LOG.info(cardsEngine.getWhoCards().toString());
     }
 
-    public void selectCharacterBtn(String selectedCard){
-        LOG.info(selectedCard);
-        if(selectedCards.contains(selectedCard)){
+    public void selectCharacterBtn(String selectedCard) {
+        if (selectedCards.contains(selectedCard)) {
+            LOG.info("Removing: " + selectedCard);
             selectedCards.remove(selectedCard);
-        }else{
+        } else {
+            LOG.info("Adding: " + selectedCard);
             selectedCards.add(selectedCard);
         }
+    }
+
+    public String initGameBtn() {
+        for (final String card : selectedCards) {
+            final Card selectedCard = cardsEngine.getCards().stream().filter(elem -> elem.getValue().equals(card)).findAny().get();
+            Graph graph = cardsEngine.newEpoch(selectedCard);
+            LOG.info("Current Epoch:\n " + graph.toString(cardsEngine.getCardsDescLst()));
+        }
+        return "initGame";
     }
 
     public GameType getGameType() {
@@ -74,5 +98,17 @@ public class PlayersSettingsBean implements Serializable {
 
     public void setSelectedCards(List<String> selectedCards) {
         this.selectedCards = selectedCards;
+    }
+
+    public int getNumPlayers() {
+        return numPlayers;
+    }
+
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
+
+    public int[] getNumPlayersList() {
+        return numPlayersList;
     }
 }

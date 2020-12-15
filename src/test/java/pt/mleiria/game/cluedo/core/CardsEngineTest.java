@@ -1,12 +1,10 @@
-package pt.mleiria.cluedo.core;
+package pt.mleiria.game.cluedo.core;
 
 import org.junit.Assert;
 import org.junit.Test;
-import pt.mleiria.cluedo.contents.*;
+import pt.mleiria.game.cluedo.contents.*;
 import pt.mleiria.graph.undirected.Graph;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class CardsEngineTest {
 
@@ -38,7 +36,7 @@ public class CardsEngineTest {
     @Test
     public void test_init_graph(){
         final CardsEngine cardsEngine = new CardsEngine(GameType.A_FORTALEZA_VERMELHA);
-        final Graph graph = cardsEngine.initGameGraph();
+        Graph graph = cardsEngine.initGameGraph();
         Assert.assertEquals(23, graph.getVertices());
         Assert.assertEquals(102, graph.getEdges());
         System.out.println(graph.toString());
@@ -46,29 +44,29 @@ public class CardsEngineTest {
     @Test
     public void test_new_epoch(){
         final CardsEngine cardsEngine = new CardsEngine(GameType.A_FORTALEZA_VERMELHA);
-        final Graph graph = cardsEngine.initGameGraph();
+        Graph graph = cardsEngine.initGameGraph();
         Assert.assertEquals(23, graph.getVertices());
         System.out.println(graph.toString());
 
         Card knownCard = Who.CERSEI_LANNISTER;
-        Graph newGraph = cardsEngine.newEpoch(knownCard);
-        System.out.println(newGraph.toString());
-        Assert.assertEquals(23, newGraph.getVertices());
+        cardsEngine.newEpoch(knownCard);
+        System.out.println(graph.toString());
+        Assert.assertEquals(23, graph.getVertices());
 
         knownCard = What.BESTA;
-        newGraph = cardsEngine.newEpoch(knownCard);
-        System.out.println(newGraph.toString());
-        Assert.assertEquals(23, newGraph.getVertices());
+        graph = cardsEngine.newEpoch(knownCard);
+        System.out.println(graph.toString());
+        Assert.assertEquals(23, graph.getVertices());
 
         knownCard = Where.CELAS_DA_PRISAO;
-        newGraph = cardsEngine.newEpoch(knownCard);
-        System.out.println(newGraph.toString());
-        Assert.assertEquals(23, newGraph.getVertices());
+        graph = cardsEngine.newEpoch(knownCard);
+        System.out.println(graph.toString());
+        Assert.assertEquals(23, graph.getVertices());
 
         knownCard = Who.SANSA_STARK;
-        newGraph = cardsEngine.newEpoch(knownCard);
-        System.out.println(newGraph.toString());
-        Assert.assertEquals(23, newGraph.getVertices());
+        graph = cardsEngine.newEpoch(knownCard);
+        System.out.println(graph.toString());
+        Assert.assertEquals(23, graph.getVertices());
 
 
 

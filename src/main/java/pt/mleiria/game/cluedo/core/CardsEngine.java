@@ -14,7 +14,7 @@ public class CardsEngine {
     private static final Logger LOG = Logger.getLogger(CardsEngine.class.getName());
 
 
-    private final List<Optional<Card>> currentEpoch;
+    private final List<Optional<Card>> cardsInPlay;
     private final List<Card> cards;
     private final List<Card> whoCards;
     private final List<Card> whereCards;
@@ -23,24 +23,24 @@ public class CardsEngine {
     private final int totalNumPossibilities;
 
     public CardsEngine(final GameType gameType) {
-        currentEpoch = new ArrayList<>();
+        cardsInPlay = new ArrayList<>();
         cards = new ArrayList<>();
 
         whoCards = Arrays.stream(Who.values()).filter(elem -> elem.getGameType().equals(gameType)).collect(Collectors.toList());
         whoCards.stream().forEach(elem -> {
-            currentEpoch.add(Optional.ofNullable(elem));
+            cardsInPlay.add(Optional.ofNullable(elem));
             cards.add(elem);
         });
 
         whatCards = Arrays.stream(What.values()).filter(elem -> elem.getGameType().equals(gameType)).collect(Collectors.toList());
         whatCards.stream().forEach(elem -> {
-            currentEpoch.add(Optional.ofNullable(elem));
+            cardsInPlay.add(Optional.ofNullable(elem));
             cards.add(elem);
         });
 
         whereCards = Arrays.stream(Where.values()).filter(elem -> elem.getGameType().equals(gameType)).collect(Collectors.toList());
         whereCards.stream().forEach(elem -> {
-            currentEpoch.add(Optional.ofNullable(elem));
+            cardsInPlay.add(Optional.ofNullable(elem));
             cards.add(elem);
         });
         this.gameType = gameType;
@@ -63,15 +63,15 @@ public class CardsEngine {
         return graph;
     }
     /**
-     * Refreshes the currenttEpoch list with the new info
+     * Refreshes the currentEpoch list with the new info
      *
      * @param knownCard
      */
     public Graph newEpoch(final Card knownCard) {
-        for (int i = 0; i < currentEpoch.size(); i++) {
-            final Optional<Card> optCard = currentEpoch.get(i);
+        for (int i = 0; i < cardsInPlay.size(); i++) {
+            final Optional<Card> optCard = cardsInPlay.get(i);
             if (optCard.isPresent() && optCard.get().equals(knownCard)) {
-                currentEpoch.set(i, Optional.empty());
+                cardsInPlay.set(i, Optional.empty());
             }
         }
         final int whoLen = whoCards.size();//getCurrentWhoLen();
@@ -82,7 +82,7 @@ public class CardsEngine {
         int cnt = 0;
         for (int i = 0; i < whoLen; i++) {
             for (int j = whoLen; j < whoLen + whatLen; j++) {
-                if (currentEpoch.get(i).isPresent() && currentEpoch.get(j).isPresent()) {
+                if (cardsInPlay.get(i).isPresent() && cardsInPlay.get(j).isPresent()) {
                     tmpLst.add(new Integer[]{i, j});
                 }
             }
@@ -90,7 +90,7 @@ public class CardsEngine {
         }
         for (int i = whoLen; i < whoLen + whatLen; i++) {
             for (int j = whoLen + whatLen; j < numVertices; j++) {
-                if (currentEpoch.get(i).isPresent() && currentEpoch.get(j).isPresent()) {
+                if (cardsInPlay.get(i).isPresent() && cardsInPlay.get(j).isPresent()) {
                     tmpLst.add(new Integer[]{i, j});
                 }
             }
@@ -99,7 +99,7 @@ public class CardsEngine {
         final List<Integer[]> graphLst = new ArrayList<>();
         graphLst.add(new Integer[]{0, numVertices});
         graphLst.add(new Integer[]{0, tmpLst.size()});
-        graphLst.addAll(tmpLst);
+        graphLst    .addAll(tmpLst);
         return new Graph(graphLst);
 
 
@@ -111,7 +111,7 @@ public class CardsEngine {
     public int getCurrentWhoLen() {
         int cnt = 0;
         for (int i = 0; i < whoCards.size(); i++) {
-            if (currentEpoch.get(i).isPresent()) {
+            if (cardsInPlay.get(i).isPresent()) {
                 cnt++;
             }
         }
@@ -124,7 +124,7 @@ public class CardsEngine {
     public int getCurrentWhatLen() {
         int cnt = 0;
         for (int i = whoCards.size(); i < whatCards.size() + whoCards.size(); i++) {
-            if (currentEpoch.get(i).isPresent()) {
+            if (cardsInPlay.get(i).isPresent()) {
                 cnt++;
             }
         }
@@ -136,8 +136,8 @@ public class CardsEngine {
      */
     public int getCurrentWhereLen() {
         int cnt = 0;
-        for (int i = whoCards.size() + whatCards.size(); i < currentEpoch.size(); i++) {
-            if (currentEpoch.get(i).isPresent()) {
+        for (int i = whoCards.size() + whatCards.size(); i < cardsInPlay.size(); i++) {
+            if (cardsInPlay.get(i).isPresent()) {
                 cnt++;
             }
         }
@@ -171,6 +171,14 @@ public class CardsEngine {
 
     }
 
+    public List<Optional<Card>> getCardsInPlay() {
+        return cardsInPlay;
+    }
+
+    public GameType getGameType() {
+        return gameType;
+    }
+
     public List<Card> getWhoCards() {
         return whoCards;
     }
@@ -186,4 +194,12 @@ public class CardsEngine {
     public int getTotalNumPossibilities() {
         return totalNumPossibilities;
     }
+
+    public List<String> getCardsDescLst(){
+        List<String> res = new ArrayList<>();
+        cards.stream().map(elem -> elem.getValue()).forEach(elem -> res.add(elem));
+        return res;
+    }
+
+
 }
